@@ -1,0 +1,18 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ post.name }}</title>
+    <link rel="stylesheet" href="{% static 'css/post_view.css' %}" ></link>
+    <link rel="stylesheet" href="{% static 'css/topnav.css' %}" ></link>    
+</head>
+<body style="background-color: rgb(230, 226, 189); margin: 0;" >
+    <div class="topnav">
+      <a href="{% url 'homepage' %}" >DJANGO BLOG</a>
+    </div>
+    <div class="card">
+        <a style="color: black; font-size: 27px;">{{ post.name }}</a>
+        <p>{{ post.body }}</p>
+    </div>   
+</body>
+</html>

@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Django Blog homepage</title>
+    <link rel="stylesheet" href="{% static 'css/homepage.css' %}" ></link>
+    <link rel="stylesheet" href="{% static 'css/topnav.css' %}" ></link>
+    <link rel="stylesheet" href="{% static 'css/register.css' %}" ></link>
+  </head>
+  <body style="background-color: rgb(230, 226, 189); margin: 0;">
+    <div class="topnav">
+      <a href="{% url 'homepage' %}" >DJANGO BLOG</a>
+    </div>
+    <div class="card">
+      <a style="color: black; font-size: 27px;">Регистрация новго пользователя</a>
+    </div>
+    <div class="register-form">
+      <form method="post">{% csrf_token %}
+        <p><input type="email" name="email" id="InputEmail" class="email" placeholeder="Электронная почта" required autofocus></input></p>
+        <p><input type="username" name="username" id="InputUsername" class="username" placeholeder="Логин" required ></input></p>
+        <p><input type="password" name="password1" id="InputPassword1" class="password" placeholeder="Пароль" required ></input></p>
+        <p><input type="password" name="password2" id="InputPassword2" class="password" placeholeder="Потвердите пароль" required ></input></p>
+        {% for field in registration_form %}
+          <p>
+            {% for error in field.errors %}
+              <p style="color: red; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif" >{{ error }}</p>
+            {% endfor %}
+          </p>
+        {% endfor %}
+        <button class="register-btn" type="submit">Зарегистрироватся</button>
+      </form>
+    </div>
+    </div>
+  </body>
+</html>
+

@@ -1,0 +1,21 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Django Blog homepage</title>
+    <link rel="stylesheet" href="{% static 'css/homepage.css' %}" ></link>
+    <link rel="stylesheet" href="{% static 'css/topnav.css' %}" ></link>     
+  </head>
+  <body style="background-color: rgb(230, 226, 189); margin: 0;">
+    <div class="topnav">
+      <a href="{% url 'homepage' %}" >DJANGO BLOG</a>
+      <a href="{% url 'register' %}" >Регистрация</a>
+    </div>
+    {% for post in posts %}  
+      <div class="card">
+        <a style="color: black; font-size: 27px;" href="{% url 'post_view' post.id %}" >{{ post.name }}</a>
+        <p>{{ post.body }}</p>
+      </div>
+    {% endfor %}
+  </body>
+</html>
