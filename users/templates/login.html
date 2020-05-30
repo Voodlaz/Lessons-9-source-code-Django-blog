@@ -1,1 +1,38 @@
-
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Django Blog homepage</title>
+    <link rel="stylesheet" href="{% static 'css/homepage.css' %}" ></link>
+    <link rel="stylesheet" href="{% static 'css/topnav.css' %}" ></link>
+    <link rel="stylesheet" href="{% static 'css/register.css' %}" ></link>
+  </head>
+  <body style="background-color: rgb(230, 226, 189); margin: 0;">
+    <div class="topnav">
+      <a href="{% url 'homepage' %}" >DJANGO BLOG</a>
+    </div>
+    <div class="card">
+      <a style="color: black; font-size: 27px;">Регистрация новго пользователя</a>
+    </div>
+    <div class="register-form">
+      <form method="post">{% csrf_token %}
+        <p><input type="username" name="username" id="InputUsername" class="username" placeholeder="Логин" required autofocus></input></p>
+        <p><input type="password" name="password" id="InputPassword" class="password" placeholeder="Пароль" required ></input></p>
+        {% for field in login %}
+          <p>
+            {% for error in field.errors %}
+              <p style="color: red; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif" >{{ error }}</p>
+            {% endfor %}
+          </p>
+        {% endfor %}
+        {% if login.non_field_error %}
+          <div style="color: red">
+            <p>{{ login_form.non_field_errors }}</p>
+          </div>
+        {% endif %}
+        <button class="register-btn" type="submit">Войти</button>
+      </form>
+    </div>
+    </div>
+  </body>
+</html>
