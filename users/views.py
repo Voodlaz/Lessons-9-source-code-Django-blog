@@ -24,6 +24,28 @@ def register(request):
         context['register_form'] = form
     return render(request, "register.html", context)
 
+def login_view(request):
+    context = {}
+    user = request.user
+    if user.is_authenticated:
+        return redirect("homepage")
+
+    if request.POST:
+        form = AuthForm(request.POST)
+        if form.is_valid():
+            username = request.POST["username"]
+            password = request.POST["password"]
+            user = authenticate(username=username, password=password)
+
+            if user:
+                login(request, user)
+                return redirect("homepage")
+
+    else:
+        form = AuthForm()
+
+    context["login"] = form
+    return render(request, "login.html", context)
 
 def logout(request):
     logout(request)
